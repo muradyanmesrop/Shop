@@ -14,6 +14,7 @@ namespace ShopUI
     public partial class CustomerItemsForm : Form
     {
         ShopDbContext dbContext;
+        public bool Button1IsClicked = false;
         public Customer Customer;
         public CustomerItemsForm()
         {
@@ -22,6 +23,7 @@ namespace ShopUI
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Button1IsClicked = true;
             dbContext = new ShopDbContext();
             if (ItemsIsCorected())
             {

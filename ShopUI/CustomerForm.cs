@@ -50,14 +50,21 @@ namespace ShopUI
         private void Add_Click(object sender, EventArgs e)
         {
             CustomerItemsForm customerItemsForm = new CustomerItemsForm();
-            do
+
+        Fagon:
+            if (customerItemsForm.ShowDialog() == DialogResult.OK && customerItemsForm.Customer != null)
             {
-                if (customerItemsForm.ShowDialog() == DialogResult.OK && customerItemsForm.Customer != null)
+                dbContext.Customers.Add(customerItemsForm.Customer);
+                dbContext.SaveChanges();
+            }
+            else
+            {
+                if (customerItemsForm.Button1IsClicked)
                 {
-                    dbContext.Customers.Add(customerItemsForm.Customer);
-                    dbContext.SaveChanges();
+                    customerItemsForm.Button1IsClicked = false;
+                    goto Fagon;
                 }
-            } while (customerItemsForm.Customer == null);
+            }
             ViewData();
             dataGridView1.Update();
         }
